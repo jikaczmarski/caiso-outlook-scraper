@@ -4,6 +4,11 @@ This tool was designed for researchers who need time series supply data from CAI
 
 This code was based off the kajpeterson repository, but is completely rewritten. The goal of such a rewrite was to fix the use of deprecated practices, improve speed and efficiency, and fix errors in the final dataset driven by certain handling of dates and times. Additionally, this scraper has both supply trends and renewable trends built into one scraper.
 
+# Current Operational Status
+
+* Supply trend data: **Fully functioning** (06/17/2022)
+* Renewables trend data: **Fully functioning** (06/17/2022)
+
 # Requirements
 
 This tool has two requirements:
@@ -60,3 +65,5 @@ The data will be saved to the `results` folder with the title I specified: `supp
 |1/10/19 0:25|3440      |7390       |862        |7379   |-10      |2263   |13  |0    |
 |1/10/19 0:30|3508      |7381       |832        |7363   |-53      |2263   |13  |0    |
 
+### Disclaimer
+It is rare, but there are several days where the data provided by CAISO is inaccurate or missing. Some examples off the top of my head are 02/18/2020 having five extra minutes in the day, and 01/02/2019 having no values for natural gas. It is important to know that this is not an error of this program, but an error that CAISO made. In my limited testing, going to the CAISO website and grabbing the data manually shows these errors. My workaround for the extra five minutes in a day is to just delete it (already built into the program) since most of the variables are equivalent to the first five minutes of the next day (but not all, specifically 02/18/2020 has a slightly different value for natural gas, but all else is equal).
