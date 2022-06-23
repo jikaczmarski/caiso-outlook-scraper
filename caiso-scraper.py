@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import os
 import glob
 import pandas as pd
@@ -29,7 +29,7 @@ def valid_date_inputs(s):
         raise argparse.ArgumentTypeError(date_error_message)
 
 def valid_sources(y):
-    source_list = ['supply-trend','renewables-trend']
+    source_list = ['supply-trend','renewables-trend',]
     if y in source_list:
         return y
     else:
@@ -44,6 +44,18 @@ args = parser.parse_args()
 
 if args.startdate > args.enddate:
     print('Error: Provided start date exceeds the end date.')
+    exit()
+else:
+    pass
+
+if args.startdate < datetime.strptime('2018-04-10','%Y-%m-%d'):
+    print('Error: Start date exceeds available data. Earliest available data is Apr 10, 2018.')
+    exit()
+else:
+    pass
+
+if args.enddate > (datetime.now() - timedelta(days=1)):
+    print('Error: No data available for dates into the future. You entered:',args.enddate.strftime("%b %d%, %Y"))
     exit()
 else:
     pass
@@ -82,6 +94,8 @@ prefs = {"download.default_directory" : csvdir}
 options.add_experimental_option("prefs",prefs)
 ser = Service(chromedriver)
 browser = webdriver.Chrome(service=ser, options=options)
+
+
 browser.get('http://www.caiso.com/TodaysOutlook/Pages/supply.aspx')
 
 elements = browser.find_elements(By.TAG_NAME, 'input')
@@ -149,11 +163,11 @@ elif args.source == "renewables-trend":
 
     browser.close()
 else:
-    print("Error: You should not have been able to get this error. Contact me.")
     quit()
 
 if args.source == "supply-trend":
     df = pd.DataFrame(columns=['datetime','renewables','natural_gas','large_hydro','imports','batteries','nuclear','coal','other'])
+    missingObservations = []
     for filename in os.listdir(csvdir) and downloaded_files:
         dftmp = pd.read_csv(csvdir + filename, header=None)
         date = (dftmp[0][0]).lstrip('Supply ')
@@ -168,10 +182,20 @@ if args.source == "supply-trend":
 
     df = df.dropna(how="all")
     df.to_csv(resultsdir + str(args.filename),index=False)
-    print("Results saved to",resultsdir + str(args.filename))
+    print("Results saved to",resultsdir + str(args.filename),end='\n')
+    missingObservations = pd.date_range(df['datetime'].min(), df['datetime'].max(), freq='5min').difference(df['datetime'])
+    if len(missingObservations) != 0:
+        with open(resultsdir + args.filename.rstrip('.csv') +'-missingObservations.txt', 'w') as fp:
+            fp.write("Missing observations: \n")
+            for item in missingObservations:
+                fp.write("%s\n" % item)
+            print('Missing observations found. For a list, see:',resultsdir + args.filename.rstrip('.csv') +'-missingObservations.txt',end='\n')
+    else:
+        print('No missing observations found.')
 
 elif args.source == "renewables-trend":
     df = pd.DataFrame(columns=['datetime','solar','wind','geothermal','biomass','biogas','small_hydro'])
+    missingObservations = []
     for filename in os.listdir(csvdir) and downloaded_files:
         dftmp = pd.read_csv(csvdir + filename, header=None)
         date = (dftmp[0][0]).lstrip('Renewables ')
@@ -185,7 +209,16 @@ elif args.source == "renewables-trend":
 
     df = df.dropna(how="all")
     df.to_csv(resultsdir + str(args.filename),index=False)
-    print("Results saved to",resultsdir + str(args.filename))
+    print("Results saved to",resultsdir + str(args.filename),end='\n')
+    missingObservations = pd.date_range(df['datetime'].min(), df['datetime'].max(), freq='5min').difference(df['datetime'])
+    if len(missingObservations) != 0:
+        with open(resultsdir + args.filename.rstrip('.csv') +'-missingObservations.txt', 'w') as fp:
+            fp.write("Missing observations: \n")
+            for item in missingObservations:
+                fp.write("%s\n" % item)
+            print('Missing observations found. For a list, see:',resultsdir + args.filename.rstrip('.csv') +'-missingObservations.txt',end='\n')
+    else:
+        print('No missing observations found.')
 else:
     pass
 
