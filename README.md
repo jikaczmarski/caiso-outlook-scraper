@@ -25,7 +25,7 @@ This tool has two requirements:
 
 # Example
 
-For this example, I will be downloading the supply trend data for January 10th, 2021 to January 13th, 2021. To do this, I first run program with the `-h` option to see what the required inputs are:
+For this example, I will be downloading the supply trend data for January 1, 2023 to January 5, 2023. To do this, I first run program with the `-h` option to see what the required inputs are:
 ```
 > (caisoenv) python caiso-scraper.py -h
 usage: caiso-scraper.py [-h] source filename startdate enddate
@@ -43,14 +43,14 @@ optional arguments:
 ```
 Given my above example, the code I will need will be:
 ```
-> (caisoenv) python caiso-scraper.py supply-trend supplyresults.csv 2023-01-01 2023-01-01
+> (caisoenv) python caiso-scraper.py supply-trend supplyresults.csv 2023-01-01 2023-01-05
 Successfully created csv download location.
 Successfully created results location.
 Data source: supply-trend 
  Results location: /Users/jikaczmarski/Documents/programming/python/caiso-data-downloader-main/results/supplyresults.csv 
  Sample begins: Jan 01, 2023 
- Sample ends: Jan 01, 2023 
- Sample length: 1 days ( 288 observations )
+ Sample ends: Jan 05, 2023 
+ Sample length: 5 days ( 1440 observations )
 Loading web driver...
 Results saved to ../results/supplyresults.csv
 No missing observations found.
@@ -62,6 +62,8 @@ The data will be saved to the `results` folder with the title I specified: `supp
 |1/1/23 0:05|4991                         |8098       |1496                                         |5889   |259      |2244   |3   |0    |
 |1/1/23 0:10|5175                         |7888       |1405                                         |5898   |231      |2246   |3   |0    |
 |1/1/23 0:15|5384                         |7637       |1416                                         |5785   |321      |2245   |3   |0    |
+
+# Visual Example
 
 
 ### Disclaimer
