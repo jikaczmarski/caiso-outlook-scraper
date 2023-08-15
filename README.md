@@ -63,8 +63,5 @@ The data will be saved to the `results` folder with the title I specified: `supp
 |1/1/23 0:10|5175                         |7888       |1405                                         |5898   |231      |2246   |3   |0    |
 |1/1/23 0:15|5384                         |7637       |1416                                         |5785   |321      |2245   |3   |0    |
 
-# Visual Example
-
-
 ### Disclaimer
 It is rare, but there are several days where the data provided by CAISO is inaccurate or missing. It is important to know that this is not an error of this program, but an error that CAISO made.
