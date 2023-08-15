@@ -14,17 +14,14 @@ _Currently working to update_
 This tool has two requirements:
 
 1. Google Chrome
-   - You need to know what version you are running as it matters for what driver you get.
 2. Chrome Driver
-   - Needs to be specific for your version of Chrome and you operating system. It *must* be placed in the `driver` folder. The one in this repository is for Chrome 102 with an M1 Macbook.
+   - Needs to be specific for your version of Chrome and you operating system. It *must* be placed in the `./driver` folder. This repository provides the chromedriver: `.../116.0.5845.96/mac-arm64/chromedriver-mac-arm64`. Chromedrivers for older versions of Chrome can be found [here](https://chromedriver.chromium.org/downloads) and newer versions can be found at [here](https://googlechromelabs.github.io/chrome-for-testing/#stable)
 
-I encourage users of Firefox and other browsers to fork this repository and alter the selenium code for their browsers of choice.
 
 # Setup
 
 1. Obtain a copy of this repository
-2. (Optional) Create a virtual environment based on requirements.txt and then enter that virtual environment
-   - If you don't do this, then it will be a hassle to ensure you have the required packages, and using the requirements.txt file ensures that this program will run properly. YMMV with newer or older packages.
+2. Create a virtual environment and install the packages in `./requirements.txt`
 
 # Example
 
