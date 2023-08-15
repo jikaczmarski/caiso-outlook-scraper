@@ -170,10 +170,11 @@ if args.source == "supply-trend":
     missingObservations = []
     for filename in os.listdir(csvdir) and downloaded_files:
         dftmp = pd.read_csv(csvdir + filename, header=None)
-        date = (dftmp[0][0]).lstrip('Supply ')
+        date = (dftmp[0][0]).lstrip('Supply ').rstrip('undefined')
         dftmp = dftmp.T
         dftmp = dftmp.iloc[1:]
         dftmp = dftmp[dftmp[0] != "24:00"] # Error fix for some downloads having a 24th hour timestamp.
+        #dftmp['datetime'] = pd.to_datetime(date + " " + dftmp.iloc[:,0], format="%m/%d/%Y %H:%M") # ValueError: time data "01/10/2019undefined 0:00" doesn't match format "%m/%d/%Y %H:%M", at position 0.
         dftmp['datetime'] = pd.to_datetime(date + " " + dftmp.iloc[:,0], format="%m/%d/%Y %H:%M")
         dftmp.rename(columns={0:'time',1:'renewables',2:'natural_gas',3:'large_hydro',4:'imports',5:'batteries',6:'nuclear',7:'coal',8:'other'},inplace=True)
         del dftmp['time']
