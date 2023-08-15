@@ -5,9 +5,9 @@ This tool was designed for researchers who need time series supply data from CAI
 This code was based off the kajpeterson repository, but is completely rewritten. The goal of such a rewrite was to fix the use of deprecated practices, improve speed and efficiency, and fix errors in the final dataset driven by certain handling of dates and times. Additionally, this scraper has both supply trends and renewable trends built into one scraper.
 
 # Current Functional Status
-
-* Supply trend data: **Fully functioning** (06/17/2022)
-* Renewables trend data: **Fully functioning** (06/17/2022)
+_Currently working to update_
+* Supply trend data: **Non-functioning** (08/15/2023)
+* Renewables trend data: **Non-functioning** (08/15/2023)
 
 # Requirements
 
