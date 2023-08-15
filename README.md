@@ -43,24 +43,26 @@ optional arguments:
 ```
 Given my above example, the code I will need will be:
 ```
-> (caisoenv) python caiso-scraper.py supply-trend supplyresults.csv 2019-01-10 2019-01-13
-Sample covers 4 days.
-downloading supply trend for 01/10/2019
-downloading supply trend for 01/11/2019
-downloading supply trend for 01/12/2019
-downloading supply trend for 01/13/2019
-Expected 1152 observations. Recieved 1152 observations.
+> (caisoenv) python caiso-scraper.py supply-trend supplyresults.csv 2023-01-01 2023-01-01
+Successfully created csv download location.
+Successfully created results location.
+Data source: supply-trend 
+ Results location: /Users/jikaczmarski/Documents/programming/python/caiso-data-downloader-main/results/supplyresults.csv 
+ Sample begins: Jan 01, 2023 
+ Sample ends: Jan 01, 2023 
+ Sample length: 1 days ( 288 observations )
+Loading web driver...
+Results saved to ../results/supplyresults.csv
+No missing observations found.
 ```
 The data will be saved to the `results` folder with the title I specified: `supplyresults.csv`. An example of the output file is provided below, but the file continues for the entire duration of the sample:
-|datetime    |renewables|natural_gas|large_hydro|imports|batteries|nuclear|coal|other|
-|------------|----------|-----------|-----------|-------|---------|-------|----|-----|
-|1/10/19 0:00|3246      |7416       |1040       |7725   |4        |2264   |13  |0    |
-|1/10/19 0:05|3281      |7507       |921        |7655   |1        |2264   |13  |0    |
-|1/10/19 0:10|3311      |7598       |874        |7497   |22       |2263   |13  |0    |
-|1/10/19 0:15|3352      |7533       |872        |7441   |36       |2263   |13  |0    |
-|1/10/19 0:20|3380      |7453       |885        |7371   |33       |2263   |13  |0    |
-|1/10/19 0:25|3440      |7390       |862        |7379   |-10      |2263   |13  |0    |
-|1/10/19 0:30|3508      |7381       |832        |7363   |-53      |2263   |13  |0    |
+|datetime|renewables                   |natural_gas|large_hydro                                  |imports|batteries|nuclear|coal|other|
+|--------|-----------------------------|-----------|---------------------------------------------|-------|---------|-------|----|-----|
+|1/1/23 0:00|4751                         |8225       |1477                                         |6129   |200      |2245   |4   |0    |
+|1/1/23 0:05|4991                         |8098       |1496                                         |5889   |259      |2244   |3   |0    |
+|1/1/23 0:10|5175                         |7888       |1405                                         |5898   |231      |2246   |3   |0    |
+|1/1/23 0:15|5384                         |7637       |1416                                         |5785   |321      |2245   |3   |0    |
+
 
 ### Disclaimer
-It is rare, but there are several days where the data provided by CAISO is inaccurate or missing. Some examples off the top of my head are 02/18/2020 having five extra minutes in the day, and 01/02/2019 having no values for natural gas. It is important to know that this is not an error of this program, but an error that CAISO made. In my limited testing, going to the CAISO website and grabbing the data manually shows these errors. My workaround for the extra five minutes in a day is to just delete it (already built into the program) since most of the variables are equivalent to the first five minutes of the next day (but not all, specifically 02/18/2020 has a slightly different value for natural gas, but all else is equal).
+It is rare, but there are several days where the data provided by CAISO is inaccurate or missing. It is important to know that this is not an error of this program, but an error that CAISO made.
