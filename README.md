@@ -2,8 +2,6 @@
 
 This tool was designed for researchers who need time series supply data from CAISO. The method used here is to webscrap the CAISO supply page, download daily supply data at the five minute interval, and then combine that data into a spreadsheet for use in econometric and statistical projects. As of now, there are two possible download sources: the supply trend and the renewables trend. The supply trend collapses all the renewable sources into one source which is often not sufficient for researchers.
 
-This code was based off the kajpeterson repository, but is completely rewritten. The goal of such a rewrite was to fix the use of deprecated practices, improve speed and efficiency, and fix errors in the final dataset driven by certain handling of dates and times. Additionally, this scraper has both supply trends and renewable trends built into one scraper.
-
 # Current Functional Status
 
 * Supply trend data: **Fully functional** (08/15/2023)
