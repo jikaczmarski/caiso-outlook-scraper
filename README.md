@@ -4,8 +4,8 @@ This tool was designed for researchers who need time series supply data from CAI
 
 # Current Functional Status
 
-* Supply trend data: **Fully functional** (08/15/2023)
-* Renewables trend data: **Fully functional** (08/15/2023)
+* Supply trend data: **Fully functional** (09/14/2023)
+* Renewables trend data: **Fully functional** (09/14/2023)
 
 # Requirements
 

@@ -64,7 +64,7 @@ input_delta = args.enddate - args.startdate
 
 path = sys.path[0]
 csvdir = f'{path}/csvraw/'
-resultsdir = f'{path}/results/'
+resultsdir = f'{path}/resultsdir/'
 
 try:
     os.mkdir(csvdir)
@@ -199,7 +199,7 @@ elif args.source == "renewables-trend":
     missingObservations = []
     for filename in os.listdir(csvdir) and downloaded_files:
         dftmp = pd.read_csv(csvdir + filename, header=None)
-        date = (dftmp[0][0]).lstrip('Renewables ')
+        date = (dftmp[0][0]).lstrip('Renewables ').rstrip('undefined')
         dftmp = dftmp.T
         dftmp = dftmp.iloc[1:]
         dftmp['datetime'] = pd.to_datetime(date + " " + dftmp.iloc[:,0], format="%m/%d/%Y %H:%M")
